@@ -8,6 +8,8 @@ if(document.readyState =='loading'){
 
  function mainBody(){
     const emailValue = sessionStorage.getItem('emailVal')
+    const sigEm = sessionStorage.getItem('singEm')
+    const realVal = sigEm || emailValue
     const portFolioImage = document.querySelectorAll('.portfolio-image')
     portFolioImage.forEach(menu=>{
 
@@ -20,7 +22,7 @@ if(document.readyState =='loading'){
     const targetH4 = portfolioDesc.getElementsByTagName('h4')[0].innerText
     const targetDiv = portfolioDesc.getElementsByTagName('div')[0].innerText.replace('$', '')
     setTimeout(async()=>{
-        await axios.post('/api/menu', {menuName:targetH4, price:targetDiv, menuImage:imageEl, emailValue:emailValue})
+        await axios.post('/api/menu', {menuName:targetH4, price:targetDiv, menuImage:imageEl, emailValue:realVal})
           
     }, 10)
             
@@ -36,46 +38,46 @@ if(document.readyState =='loading'){
 
     //read breakfast
 
-    setTimeout(async()=>{
-  const data = await axios.get('/api/breakfast')
-  console.log(data)
-  const breakfast = document.querySelector('.breakfastt')
-  const quraac = data.data.map(food=>{
-      console.log(food.image.slice(65))
-      return `
-      <div class="col-lg-3 col-md-6">
-<div class="iportfolio mb-4 clearfix">
-<a href="#" class="portfolio-image"><img src="${food.image.slice(65)}" alt="1" class="rounded"></a>
-<div class="portfolio-desc pt-2">
-<h4 class="mb-1"><a href="#" class="">Banana Pancake</a></h4>
-<div class="item-price">&dollar; 19.49</div>
-</div>
-</div>
-</div>
+//     setTimeout(async()=>{
+//   const data = await axios.get('/api/breakfast')
+//   console.log(data)
+//   const breakfast = document.querySelector('.breakfastt')
+//   const quraac = data.data.map(food=>{
+//       console.log(food.image.slice(65))
+//       return `
+//       <div class="col-lg-3 col-md-6">
+// <div class="iportfolio mb-4 clearfix">
+// <a href="#" class="portfolio-image"><img src="${food.image.slice(65)}" alt="1" class="rounded"></a>
+// <div class="portfolio-desc pt-2">
+// <h4 class="mb-1"><a href="#" class="">Banana Pancake</a></h4>
+// <div class="item-price">&dollar; 19.49</div>
+// </div>
+// </div>
+// </div>
       
-      `
-  }).join('')
-  breakfast.innerHTML = quraac
-    }, 10)
+//       `
+//   }).join('')
+//   breakfast.innerHTML = quraac
+//     }, 10)
 
 
-    setTimeout(async()=>{
-        const data = await axios.get('/api/lunch')
-        const breakfast = document.querySelector('.lunch')
-        const qado = data.data.map(food=>{
-            console.log(food.image.slice(65))
-            return `
-            <div class="col-lg-3 col-md-6">
-            <div class="iportfolio mb-4 clearfix">
-            <a href="#" class="portfolio-image"><img src="${food.image.slice(65)}" alt="1" class="rounded"></a>
-            <div class="portfolio-desc pt-2">
-            <h4 class="mb-1"><a href="#">Pomegranate Salad</a></h4>
-            <div class="item-price">&dollar; 19.49</div>
-            </div>
-            </div>
-            </div>
+    // setTimeout(async()=>{
+    //     const data = await axios.get('/api/lunch')
+    //     const breakfast = document.querySelector('.lunch')
+    //     const qado = data.data.map(food=>{
+    //         console.log(food.image.slice(65))
+    //         return `
+    //         <div class="col-lg-3 col-md-6">
+    //         <div class="iportfolio mb-4 clearfix">
+    //         <a href="#" class="portfolio-image"><img src="${food.image.slice(65)}" alt="1" class="rounded"></a>
+    //         <div class="portfolio-desc pt-2">
+    //         <h4 class="mb-1"><a href="#">Pomegranate Salad</a></h4>
+    //         <div class="item-price">&dollar; 19.49</div>
+    //         </div>
+    //         </div>
+    //         </div>
             
-            `
-        }).join('')
-    },10)
+    //         `
+    //     }).join('')
+    // },10)
 }

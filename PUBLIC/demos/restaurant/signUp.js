@@ -26,3 +26,9 @@ e.preventDefault()
      
     }
 })
+
+const loginButton = document.querySelector('.loginButton')
+loginButton.addEventListener('click', (e)=>{
+    e.preventDefault()
+    window.location.replace('login.html')
+})

@@ -1,10 +1,12 @@
 const tableBody = document.querySelector('.tableBody')
-const emailValue = sessionStorage.getItem('emailVal')
-const singEm = sessionStorage.getItem('singEm')
 window.addEventListener('DOMContentLoaded', async()=>{
+    const singEm = sessionStorage.getItem('singEm')
+    const emailValue = sessionStorage.getItem('emailVal')
+    console.log(singEm, emailValue)
     const data = await axios.get('/data/cart')
     const usersCart = data.data.map(cart=>{
-        if(cart.email === emailValue || singEm){
+        const realV = singEm || emailValue
+        if(cart.email === realV){
             return `
             <tr>
             <td class=""><img src="${cart.image}" class="imgFood" alt="food image" style="width: 70px; height:60px;"></td>
@@ -12,7 +14,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
             <td class="pp">${"$" + cart.qiimahaSheygiiba}</td>
             <td class="" ><input class="quantity" type="number" class="form-control" style="width: 50px; "></td>
             <td ><button class="btn btn-danger deleteRow">Remove</button></td>
-            
+        
         </tr>`
         }
     }).join('')
@@ -92,6 +94,7 @@ sendOrder.addEventListener('click', async()=>{
         // console.log(imageItem, magac, pp, quantity)
         
         if(totalP >0){
+            sessionStorage.setItem('total',totalP)
             const alertPart = document.getElementsByClassName('alertPart')[0]
             const fullName = document.getElementsByClassName('fullName')[0].value
             if(fullName !==''){
@@ -161,7 +164,8 @@ btnCheckOut.addEventListener('click', (e)=>{
 const btnPhoneApp = document.querySelector('.phoneApp')
 btnPhoneApp.addEventListener('click', (e)=>{
     const totalP = Number(document.getElementsByClassName('totalMoney')[0].innerText.replace('$', ''))
-    e.target.href= `tel:*712*612518368*${totalP}#`
+    const totalM = sessionStorage.getItem('total')
+    e.target.href= `tel:*712*610941595*${totalM}#`
     console.log(e.target)
    
 })

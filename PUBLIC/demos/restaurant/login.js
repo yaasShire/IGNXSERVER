@@ -21,3 +21,8 @@ btnXarey.addEventListener('click', async(e)=>{
   }
   console.log(loginData)
 })
+ const signUpButton = document.querySelector('.singUpButton')
+ signUpButton.addEventListener('click', (e)=>{
+   e.preventDefault()
+   window.location.replace('signUp.html')
+  })
